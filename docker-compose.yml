@@ -1,10 +1,12 @@
-version: "3.8"
-
 services:
-  fastapi:
-    image: fastapi
-    build:
-      context: ./
-      dockerfile: Dockerfile
+  server:
+    build: .
     ports:
-      - "127.0.0.1:5000:5000"
+      - "8000:8000"  # Map host port 8000 to container port 8000
+    environment:
+      FLASK_APP: main.py
+      FLASK_RUN_HOST: 0.0.0.0
+      DATABASE_URL: sqlite:///mydatabase.db
+    volumes:
+      - .:/app
+    command: flask run --host=0.0.0.0 --port=8000

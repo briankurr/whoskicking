@@ -1,0 +1,87 @@
+# Exclude version control system files
+.git
+.gitignore
+
+# Exclude Python cache and compiled files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Exclude virtual environments
+venv/
+env/
+ENV/
+.venv/
+.python-version
+
+# Exclude development and editor config files
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*.swo
+*.swn
+*.sublime-project
+*.sublime-workspace
+
+# Exclude logs and local databases
+*.log
+*.sqlite3
+
+# Exclude environment files
+.env
+*.env
+
+# Exclude build and distribution directories
+build/
+dist/
+.eggs/
+*.egg-info/
+pip-wheel-metadata/
+
+# Exclude coverage and test reports
+htmlcov/
+.coverage
+.tox/
+.nox/
+pytest_cache/
+.cache/
+junitxml/
+
+# Exclude documentation
+docs/
+*.md
+*.rst
+
+# Exclude Docker files (if not needed inside the image)
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Exclude node modules (if you have a frontend)
+node_modules/
+npm-debug.log
+yarn-error.log
+yarn-debug.log*
+
+# Exclude temporary files
+tmp/
+temp/
+*.tmp
+
+# Exclude media/uploads (if any)
+media/
+uploads/
+
+# Exclude tests (if not required in the image)
+tests/
+test/
+
+# Exclude miscellaneous files
+*.pid
+*.sock
+*.gz
+*.zip
+*.tar
+*.tar.gz
+*.tgz

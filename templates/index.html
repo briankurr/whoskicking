@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NFL Game Matchups</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-3xl font-bold mb-6 text-center">NFL Game Matchups</h1>
+        <div id="games-container" class="space-y-4">
+            {% for game in games %}
+            <div class="game-card bg-white rounded-lg shadow-md p-4">
+                <div class="flex justify-between items-center">
+                    <span class="text-lg font-semibold">{{ game.home_team }}</span>
+                    <span class="text-sm">vs</span>
+                    <span class="text-lg font-semibold">{{ game.away_team }}</span>
+                </div>
+                <div class="mt-2 text-center text-sm">
+                    {% if game.kickoff_team %}
+                    <span class="text-green-600">{{ game.kickoff_team }} kicking off in 2nd half</span>
+                    {% else %}
+                    <span class="text-yellow-600">Kickoff information not available</span>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
