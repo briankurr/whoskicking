@@ -11,8 +11,8 @@ def fetch_teams() -> list[Team]:
 
 def create_game_matchups(teams: list[Team]) -> list[dict]:
     games = []
-    logger.info(f"Teams: {teams}")
     if len(teams) < 2:
+        logger.warning("Not enough teams to create game matchups")
         return games
 
     for i in range(12):

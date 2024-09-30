@@ -17,6 +17,9 @@ COPY pyproject.toml poetry.lock ./
 RUN poetry config virtualenvs.create false \
     && poetry install --no-interaction --no-ansi
 
+# Install watchdog for file change detection
+RUN pip install watchdog
+
 # Copy the rest of the application code into the container
 COPY . .
 
@@ -27,4 +30,4 @@ EXPOSE 8000
 ENTRYPOINT ["poetry", "run"]
 
 # Default command to run when the container starts
-CMD ["flask", "run", "--host=0.0.0.0", "--port=8000"]
+CMD ["python", "-m", "flask", "run", "--host=0.0.0.0", "--port=8000"]
