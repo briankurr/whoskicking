@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>NFL Game Matchups</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    </head>
+    <body class="bg-gray-100">
+        <div class="container mx-auto px-4 py-8">
+            <h1 class="text-3xl font-bold mb-6 text-center">NFL Games</h1>
+            <ul class="space-y-4">
+                {% for game in games %}
+                <li class="flex items-stretch mb-4 rounded-lg shadow-md overflow-hidden">
+                    <div
+                        class="flex-1 p-4 flex items-center justify-start"
+                        style="background-color: #{{ game.home_team.color }}; color: #{{ game.home_team.alternate_color }};"
+                    >
+                        <span>{{ game.home_team.code }}</span>
+                        <span class="font-bold ml-2">{{ game.home_team.name }}</span>
+                    </div>
+                    <div
+                        class="flex-1 p-4 flex items-center justify-end"
+                        style="background-color: #{{ game.away_team.color }}; color: #{{ game.away_team.alternate_color }};"
+                    >
+                        <span>{{ game.away_team.code }}</span>
+                        <span class="font-bold ml-2">{{ game.away_team.name }}</span>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </body>
+</html>
