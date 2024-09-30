@@ -4,6 +4,9 @@ FROM python:3.12
 # Set the working directory in the container
 WORKDIR /app
 
+# Install SQLite3
+RUN apt-get update && apt-get install -y sqlite3
+
 # Install Poetry
 RUN pip install --no-cache-dir poetry
 

@@ -6,7 +6,7 @@ services:
     environment:
       FLASK_APP: main.py
       FLASK_RUN_HOST: 0.0.0.0
-      DATABASE_URL: sqlite:///mydatabase.db
+      DATABASE_URL: sqlite:////app/whoskicking.db
     volumes:
       - .:/app
     command: flask run --host=0.0.0.0 --port=8000

@@ -1,19 +1,7 @@
-import os
-from flask import Flask, render_template
-from flask_sqlalchemy import SQLAlchemy
-from flask_socketio import SocketIO
-from sqlalchemy.orm import DeclarativeBase
-
-class Base(DeclarativeBase):
-    pass
-
-db = SQLAlchemy(model_class=Base)
-app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL")
-db.init_app(app)
-socketio = SocketIO(app)
-
-from models import Game
+# app/routes.py
+from flask import render_template
+from app import app, db, socketio
+from app.models import Game
 from nfl_api import fetch_nfl_data, process_game_data
 
 @app.route('/')
@@ -52,7 +40,9 @@ def update_games():
         
         socketio.sleep(10)  # Update every 10 seconds
 
+# Start the background task
 socketio.start_background_task(update_games)
 
+# Ensure database tables are created
 with app.app_context():
     db.create_all()
