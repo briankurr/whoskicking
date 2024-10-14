@@ -1,20 +1,42 @@
+import enum
 from app import db
+from sqlalchemy import Enum
+
+class SeasonType(enum.Enum):
+    PRE_SEASON = 1
+    REGULAR_SEASON = 2
+    POST_SEASON = 3
+    OFF_SEASON = 4
 
 class Game(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    game_id = db.Column(db.String(64), unique=True, nullable=False)
+    season_id = db.Column(db.Integer, db.ForeignKey('season.id'), nullable=False)
     home_team = db.Column(db.String(64), nullable=False)
     away_team = db.Column(db.String(64), nullable=False)
-    kickoff_team = db.Column(db.String(64))
+    start_time = db.Column(db.DateTime, nullable=False)
 
     def to_dict(self):
         return {
             'id': self.id,
-            'game_id': self.game_id,
+            'season_id': self.season_id,
             'home_team': self.home_team,
             'away_team': self.away_team,
-            'kickoff_team': self.kickoff_team
+            'start_time': self.start_time
         }
+
+
+class Season(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    year = db.Column(db.Integer, nullable=False)
+    type = db.Column(Enum(SeasonType), nullable=False)
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'year': self.year,
+            'type': self.type.value
+        }
+
 
 class Team(db.Model):
     id = db.Column(db.Integer, primary_key=True)
